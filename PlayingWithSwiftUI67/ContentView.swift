@@ -36,11 +36,19 @@ struct ContentView: View {
                     Button(action: {
                         present = true
                     }, label: {
-                        Text("Go To Black")
-                            .padding()
-                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
-                            .background(.black)
-                        
+                        ZStack {
+                            Text("Go To Black")
+                                .padding()
+                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                                .background(.black)
+                            Path { path in
+                                path.addArc(center: CGPoint(x: 200, y: 200), radius: 100, startAngle: .degrees(-45), endAngle: .degrees(225), clockwise: false)
+                                
+                            }
+                            .stroke(Color.blue, lineWidth: 2)
+                            .scaleEffect(CGSize(width: 1.0, height: 0.5))
+                            
+                        }
                     })
                     .sheet(isPresented: $present, content: {
                         BlackDestination()
