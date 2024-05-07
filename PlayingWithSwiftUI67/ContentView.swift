@@ -13,38 +13,49 @@ struct ContentView: View {
     @State var presentSetting: Bool = false
     
     var body: some View {
-
         NavigationStack {
-            VStack {
-                Text("Hello, world!")
-                    .padding()
+            TabView {
+                VStack {
+                    Text("Hello, world!")
+                        .padding()
                     
-                NavigationLink {
-                    NewPage()
-                } label: {
-                    VStack{
-                        Image("Maxwell")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60)
-                        Text("continue to next page")
+                    NavigationLink {
+                        NewPage()
+                    } label: {
+                        VStack{
+                            Image("Maxwell")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60)
+                            Text("continue to next page")
+                        }
+                        .padding()
+                        .border(.blue)
+                    }
+                    
+                    Button(action: {
+                        present = true
+                    }, label: {
+                        Text("Go To Black")
+                            .padding()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                            .background(.black)
+                        
+                    })
+                    .sheet(isPresented: $present, content: {
+                        BlackDestination()
+                    })
+                    
+                }
+                    .tabItem {
+                        Label("Navigation", systemImage: "globe")
+                    }
+                
+                GaugeView()
+                    .tabItem {
+                        Label("Gauge", systemImage: "gauge.with.needle")
                     }
                     .padding()
-                    .border(.blue)
-                }
-                
-                Button(action: {
-                    present = true
-                }, label: {
-                    Text("Go To Black")
-                        .padding()
-                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
-                        .background(.black)
-                    
-                })
-                .sheet(isPresented: $present, content: {
-                    BlackDestination()
-                })
 
             }
             .navigationTitle("Main Page")

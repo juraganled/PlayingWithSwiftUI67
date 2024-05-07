@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct GaugeView: View {
+    @State var speed: Double = 0.0
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Slider(value: $speed, in: 0...250) {
+                
+                Text("Speed")
+            } minimumValueLabel: {
+                Text("0")
+            } maximumValueLabel: {
+                Text("250")
+            }
+            
+            Gauge(value: speed, in: 0...250) {
+                
+                Text("Speed")
+            } currentValueLabel: {
+                Text(Int(speed), format: .number)
+            } minimumValueLabel: {
+                Text("0")
+            } maximumValueLabel: {
+                Text("250")
+            }
+        }
     }
 }
 
